@@ -33,6 +33,7 @@
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0.2</version>
+			 <scope>provided</scope> <!-- This is crucial; allows the project to depend on Tomcat for this -->
 		</dependency>
 
 		<dependency>
