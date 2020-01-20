@@ -27,23 +27,21 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.10.Final</version>
 		</dependency>
-<!-- 
-		add oracle db JDBC Driver
+		<!-- add oracle db JDBC Driver <dependency> <groupId>com.oracle</groupId> 
+			<artifactId>ojdbc7</artifactId> <version>12.2.0.1.0</version> <scope>provided</scope> 
+			This is crucial; allows the project to depend on Tomcat for this </dependency> -->
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc7 <dependency> 
+			<groupId>com.oracle</groupId> <artifactId>ojdbc7</artifactId> <version>12.1.0.2</version> 
+			<scope>provided</scope> This is crucial; allows the project to depend on 
+			Tomcat for this </dependency> -->
+
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
-			<version>12.2.0.1.0</version>
-			<scope>provided</scope> This is crucial; allows the project to depend on Tomcat for this
-		</dependency>
- -->
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc7 -->
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc7</artifactId>
-			<version>12.1.0.2</version>
+			<version>12.1.0</version>
 			<scope>provided</scope> <!-- This is crucial; allows the project to depend on Tomcat for this -->
 		</dependency>
-
+		
 		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
