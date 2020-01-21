@@ -19,21 +19,16 @@ export class AuthService {
   $loginError = this.loginErrorStream.asObservable();
   $registerError = this.registerErrorStream.asObservable();
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(credentials: any) { //
-    this.httpClient.post<User>('http://localhost:8080/QMSystem/login', credentials, {
+    this.httpClient.post<User>('http://localhost:8080/InputURLHere/login', credentials, {
       withCredentials: true // processes only if cedentials are filled ?
     }).subscribe( //
       data => { // if successful / 200's is returned
         console.log('logged in'); // prints error, not required
-        if (data.user_role === 1) {
-          this.router.navigateByUrl('/mmain'); // the link to the next location
-          this.currentUserStream.next(data); // sends user data to next location
-        } else {
-          this.router.navigateByUrl('/umain'); // the link to the next location
-          this.currentUserStream.next(data); // sends user data to next location
-        }
+        //this.router.navigateByUrl('/whereever I want to go next'); // the link to the next location
+        //this.currentUserStream.next(data); // sends user data to next location
       },
       err => { // if successful / 400's is returned
         console.log(err); // prints error, not required
