@@ -19,12 +19,14 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<tx:annotation-driven></tx:annotation-driven>
 
+<!-- copy this into applicationContext.xml and fill out empty fields -->
+
 	<bean name="ourDataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="url"
-			value="" />
-		<property name="username" value="" />
-		<property name="password" value="" />
+			value="" /><!-- YOUR URL HERE -->
+		<property name="username" value="" /><!-- YOUR USERNAME HERE -->
+		<property name="password" value="" /><!-- YOUR PASSWORD HERE -->
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
 	</bean>
@@ -38,7 +40,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.default_schema"></prop>
+				<prop key="hibernate.default_schema"></prop><!-- YOUR USERNAME HERE -->
 			</props>
 		</property>
 	</bean>
