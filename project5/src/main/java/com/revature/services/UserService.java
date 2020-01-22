@@ -1,5 +1,6 @@
 package com.revature.services;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,10 @@ public class UserService {
 
 	public UserService() {
 		super();
-		System.out.println("Inside no-arg constructor");
 	}
 
 	public UserService(com.revature.repositories.UserRepository userRepository) {
 		super();
-		System.out.println("Inside 1-arg constructor");
 		this.userRepository = userRepository;
 	}
 	
@@ -41,9 +40,8 @@ public class UserService {
 		return "UserService [userRepository=" + userRepository + "]";
 	}
 
-	public User findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public static User findById(int id) {
+		return null; //connect to database here
 	}
 
 	public boolean ifUserExist(User user) {
