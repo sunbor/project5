@@ -78,6 +78,21 @@
 			<version>5.2.3.RELEASE</version>
 		</dependency>
 
+		<!-- Trying Spring Security -->
+	 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-core</artifactId>
+    <version>5.2.1.RELEASE</version>
+</dependency>
+	 
+		<!-- Spring Security OAuth2 -->
+	<!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
+<dependency>
+    <groupId>org.springframework.security.oauth</groupId>
+    <artifactId>spring-security-oauth2</artifactId>
+    <version>2.4.0.RELEASE</version>
+</dependency>
 
 	</dependencies>
 </project>
