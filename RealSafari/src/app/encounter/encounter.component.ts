@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EncounterService } from '../services/encounter.service';
+
+const _DIGIDEX_SIZE_: number = 100; // how many different Digimon the API has, hard coded for now
 
 @Component({
   selector: 'app-encounter',
@@ -10,11 +13,16 @@ export class EncounterComponent implements OnInit {
   private escapeRate: number; // base rate determined by digimon evolution
   // private digimon: Digimon; // Will need to feed a digimon into this
 
-  constructor() { }
+  constructor(private encounterService: EncounterService) { }
 
   ngOnInit() {
   }
 
+
+  beginEncounter() {
+    let encounterNumber: number = Math.floor(Math.random()*_DIGIDEX_SIZE_ + 1); // Random generated the Digimon id from 1 to 100.
+    this.encounterService.getEncounter(encounterNumber);
+  };
 
   throwBall(): void {
     let catchRoll: number = Math.floor(Math.random()*101); // Random integer between 0 and 100

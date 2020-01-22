@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CatchServiceService } from './encounter-service.service';
+import { EncounterService } from './encounter.service';
 
 describe('CatchServiceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CatchServiceService = TestBed.get(CatchServiceService);
+    const service: EncounterService = TestBed.get(EncounterService);
     expect(service).toBeTruthy();
   });
 });
