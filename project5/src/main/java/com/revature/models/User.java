@@ -1,102 +1,50 @@
 package com.revature.models;
 
-import java.io.Serializable;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-public class User implements Serializable {
+import org.springframework.stereotype.Component;
 
-	private static final long serialVersionUID = -4553508689874995351L;
+@Entity
+@Table(name="users")
+@Component
+public class User {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="user_seq_gen")
+	@SequenceGenerator(name="user_seq_gen", sequenceName="user_id_seq")
+	@Column(name = "user_id")
 	private int userId;
-	private String firstName;
-	private String lastName;
-	private String username;
-	private String password;
-	private String role;
 	
-	@Autowired
-	private Digimon digimon;
-
-	public User(int userId, String firstName, String lastName, String username, String password, String role,
-			Digimon digimon) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.password = password;
-		this.role = role;
-		this.digimon = digimon;
-	}
+	@Column(nullable=false,unique=true)
+	private String username;
+	
+	@Column(nullable=false)
+	private String password;
+	
+	@OneToMany(mappedBy="partner", fetch=FetchType.EAGER)
+	private List<Digimon> party;
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
-				+ username + ", password=" + password + ", role=" + role + ", digimon=" + digimon + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((digimon == null) ? 0 : digimon.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + userId;
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (digimon == null) {
-			if (other.digimon != null)
-				return false;
-		} else if (!digimon.equals(other.digimon))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		if (userId != other.userId)
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+	public User(int userId, String username, String password, List<Digimon> party) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.party = party;
 	}
 
 	public int getUserId() {
@@ -105,22 +53,6 @@ public class User implements Serializable {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getUsername() {
@@ -139,23 +71,57 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
+	public List<Digimon> getParty() {
+		return party;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setParty(List<Digimon> party) {
+		this.party = party;
 	}
 
-	public Digimon getDigimon() {
-		return digimon;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((party == null) ? 0 : party.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + userId;
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
 	}
 
-	public void setDigimon(Digimon digimon) {
-		this.digimon = digimon;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (party == null) {
+			if (other.party != null)
+				return false;
+		} else if (!party.equals(other.party))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (userId != other.userId)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", party=" + party
+				+ "]";
+	}
 
-	
-}
