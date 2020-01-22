@@ -1,1 +1,10 @@
-<p>encounter works!</p>
+<div class="encounter-screen">
+    <div *ngIf="!isInEncounter">
+        <button type="button" class="btn btn-success" (click)="beginEncounter()">Find a Digimon</button>
+        Not currently in an encounter
+    </div>
+    <div *ngIf="isInEncounter">
+        Currently in an encounter!
+    </div>
+    encounter works!
+</div>
