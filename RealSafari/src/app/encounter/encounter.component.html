@@ -1,10 +1,15 @@
 <div class="encounter-screen">
     <div *ngIf="!isInEncounter">
+        <h4>Not currently in an encounter</h4> <br>
         <button type="button" class="btn btn-success" (click)="beginEncounter()">Find a Digimon</button>
-        Not currently in an encounter
+        
     </div>
     <div *ngIf="isInEncounter">
-        Currently in an encounter!
+        <h4>Currently in an encounter!</h4>
+        <img src="{{digimon[0].img}}"/>
+        <button type="button" class="btn btn-success" (click)="throwBait()">Throw Bait</button>
+        <button type="button" class="btn btn-danger" (click)="throwRock()">Throw Rock</button>
+        <button type="button" class="btn btn-warn" (click)="throwBall()">Throw Ball</button>
     </div>
     encounter works!
 </div>

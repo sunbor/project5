@@ -30,6 +30,8 @@ export class EncounterComponent implements OnInit {
       data => {
         this.digimon = data;
         this.isInEncounter = true;
+        console.log(this.digimon);
+        console.log(this.digimon[0].img);
       },
       err => {
         console.log(`An error occured when getting Digimon with id: ${encounterValue}.`)
