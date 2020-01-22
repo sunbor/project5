@@ -2,6 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { EncounterService, Digimon } from '../services/encounter.service';
 
 const _DIGIDEX_SIZE_: number = 100; // how many different Digimon the API has, hard coded for now
+const _IN_TRAINING_CATCH_RATE_: number = 9; // base catch rate of Digimon with level "In Training" or "Fresh"
+const _IN_TRAINING_ESCAPE_RATE_: number = 2; // base escape rate of Digimon with level "In Training" or "Fresh"
+const _ROOKIE_CATCH_RATE_: number = 7;
+const _ROOKIE_ESCAPE_RATE_: number = 3;
+const _CHAMPION_CATCH_RATE_: number = 5;
+const _CHAMPION_ESCAPE_RATE_: number = 5;
+const _ULTIMATE_CATCH_RATE_: number = 3;
+const _ULTIMATE_ESCAPE_RATE_: number = 7;
+const _MEGA_CATCH_RATE_: number = 2;
+const _MEGA_ESCAPE_RATE_: number = 9;
 
 @Component({
   selector: 'app-encounter',
@@ -29,9 +39,9 @@ export class EncounterComponent implements OnInit {
     this.encounterService.getEncounter(encounterValue).subscribe(
       data => {
         this.digimon = data;
+        this.setBaseRates();
         this.isInEncounter = true;
-        console.log(this.digimon);
-        console.log(this.digimon[0].img);
+        console.log(this.digimon[0]);
       },
       err => {
         console.log(`An error occured when getting Digimon with id: ${encounterValue}.`)
@@ -40,10 +50,37 @@ export class EncounterComponent implements OnInit {
     );
   };
 
+  setBaseRates() {
+    if (this.digimon[0].level === "In Training" || this.digimon[0].level === "Fresh") {
+      this.catchRate = _IN_TRAINING_CATCH_RATE_;
+      this.escapeRate = _IN_TRAINING_ESCAPE_RATE_;
+    } else if (this.digimon[0].level === "Rookie") {
+      this.catchRate = _ROOKIE_CATCH_RATE_;
+      this.escapeRate = _ROOKIE_ESCAPE_RATE_;
+    } else if (this.digimon[0].level === "Champion") {
+      this.catchRate = _CHAMPION_CATCH_RATE_;
+      this.escapeRate = _CHAMPION_ESCAPE_RATE_;
+    } else if (this.digimon[0].level === "Ultimate") {
+      this.catchRate = _ULTIMATE_CATCH_RATE_;
+      this.escapeRate = _ULTIMATE_ESCAPE_RATE_;
+    } else {
+      this.catchRate = _MEGA_CATCH_RATE_;
+      this.escapeRate = _MEGA_ESCAPE_RATE_;
+    }
+  }
+
   throwBall(): void {
     let catchRoll: number = Math.floor(Math.random() * 101); // Random integer between 0 and 100
     if (catchRoll + (this.catchRate * 5) >= 100) { // 100% catch rate
-      // Call successful catch method
+      console.log(`Caught the Digimon ${this.digimon[0].name}!`);
+      this.saveDigimon();
+    } else {
+      console.log(`Failed to catch ${this.digimon[0].name}!`)
+      this.escapeRate = this.escapeRate + 2; // Increases the escape chance by 10% if capture fails
+      if (this.escapeRate > 20) {
+        this.escapeRate = 20;
+      }
+      this.rollForEscape();
     }
   }
 
@@ -59,6 +96,8 @@ export class EncounterComponent implements OnInit {
       this.escapeRate = 1;
     }
 
+    console.log(this.catchRate);
+    console.log(this.escapeRate);
     this.rollForEscape();
   }
 
@@ -73,14 +112,16 @@ export class EncounterComponent implements OnInit {
     if (this.escapeRate > 20) {
       this.escapeRate = 20;
     }
-
+    console.log(this.catchRate);
+    console.log(this.escapeRate);
     this.rollForEscape();
   }
 
   rollForEscape(): void {
     let escapeRoll: number = Math.floor(Math.random() * 101); // Random integer between 0 and 100
     if ((escapeRoll - 100 + (this.escapeRate * 5)) > 0) {
-      // Digimon will flee
+      console.log("Digimon escaped!")
+      this.isInEncounter = false;
     }
     // Add some logic to give a hint to the user if the Digimon is close to fleeing and/or has a high catch rate
   }
