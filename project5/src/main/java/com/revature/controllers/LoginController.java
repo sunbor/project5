@@ -10,7 +10,7 @@ import com.revature.services.UserService;
 @Controller
 public class LoginController {
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login() {
 		int id = 0;//fix this later
 		return UserService.findById(id);
