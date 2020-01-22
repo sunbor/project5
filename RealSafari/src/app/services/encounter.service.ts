@@ -17,7 +17,7 @@ export class EncounterService {
   endEncounter() {
   }
 
-  saveCatch(credentials) { // Followed an April 2019 Angular example on this one
+  saveCatch(credentials) {
     return this.http.post("http://localhost:8080/project5/users/digimon", credentials, { withCredentials: true });
   }
 
