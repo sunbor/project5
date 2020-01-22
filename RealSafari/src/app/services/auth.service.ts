@@ -22,13 +22,13 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(credentials: any) { //
-    this.httpClient.post<User>('http://localhost:8080/InputURLHere/login', credentials, {
+    this.httpClient.post<User>('http://localhost:8080/project5/login', credentials, {
       withCredentials: true // processes only if cedentials are filled ?
     }).subscribe( //
       data => { // if successful / 200's is returned
         console.log('logged in'); // prints error, not required
-        //this.router.navigateByUrl('/whereever I want to go next'); // the link to the next location
-        //this.currentUserStream.next(data); // sends user data to next location
+        this.router.navigateByUrl('/whereever I want to go next'); // the link to the next location
+        this.currentUserStream.next(data); // sends user data to next location
       },
       err => { // if successful / 400's is returned
         console.log(err); // prints error, not required
