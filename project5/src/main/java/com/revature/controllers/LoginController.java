@@ -10,9 +10,12 @@ import com.revature.services.UserService;
 @Controller
 public class LoginController {
 
+	
+	//Log in, send back user data, and set session
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public User login() {
-		int id = 0;//fix this later
-		return UserService.findById(id);
+		String username = "";//fix this later
+		String password = "";//fix this later
+		return UserService.login(username, password);
 	}
 }
