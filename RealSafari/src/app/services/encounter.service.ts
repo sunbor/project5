@@ -14,9 +14,6 @@ export class EncounterService {
   return this.http.get<Digimon>(`https://digimon-api.herokuapp.com/api/digimon/id/${encounterValue}`);
   }
 
-  endEncounter() {
-  }
-
   saveCatch(credentials) {
     return this.http.post("http://localhost:8080/project5/users/digimon", credentials, { withCredentials: true });
   }
