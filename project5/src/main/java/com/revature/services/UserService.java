@@ -6,8 +6,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import com.reavture.util.HibernateUtil;
 import com.revature.models.User;
+import com.revature.util.HibernateUtil;
 
 public class UserService {
 

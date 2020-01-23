@@ -18,7 +18,7 @@ import com.revature.repositories.IUserDao;
 @CrossOrigin
 public class LoginController {
 
-	ApplicationContext ac = new ClassPathXmlApplicationContext("applicationcontext.xml");
+	ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	IUserDao dao = (IUserDao) ac.getBean("userDao");
 
 	// Log in, send back user data, and set session
