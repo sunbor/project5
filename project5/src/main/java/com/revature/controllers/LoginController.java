@@ -1,21 +1,39 @@
 package com.revature.controllers;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.revature.models.LoginInfo;
 import com.revature.models.User;
-import com.revature.services.UserService;
+import com.revature.repositories.IUserDao;
 
 @Controller
+@CrossOrigin
 public class LoginController {
 
-	
-	//Log in, send back user data, and set session
+	ApplicationContext ac = new ClassPathXmlApplicationContext("applicationcontext.xml");
+	IUserDao dao = (IUserDao) ac.getBean("userDao");
+
+	// Log in, send back user data, and set session
+	// this looks good, explore web.xml to avoid CORS errors
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public User login() {
-		String username = "";//fix this later
-		String password = "";//fix this later
-		return UserService.login(username, password);
+	public ResponseEntity<User> login(@RequestBody LoginInfo u) {
+		System.out.println("we're here");
+		String username = u.getUsername();
+		String password = u.getPassword();
+		User loggedIn = dao.getByUsernameAndPassword(username, password);
+		if (loggedIn == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} else {
+			return ResponseEntity.status(HttpStatus.ACCEPTED).body(loggedIn);
+		}
+
 	}
 }

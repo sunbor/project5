@@ -22,7 +22,7 @@ export class AuthService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(credentials: any) { //
-    this.httpClient.post<User>('http://localhost:8080/project5/login', credentials, {
+    this.httpClient.put<User>('http://localhost:8080/project5/login', credentials, {
       withCredentials: true // processes only if cedentials are filled ?
     }).subscribe( //
       data => { // if successful / 200's is returned
