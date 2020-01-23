@@ -21,10 +21,11 @@ const _MEGA_ESCAPE_RATE_: number = 45;
   styleUrls: ['./encounter.component.css']
 })
 export class EncounterComponent implements OnInit {
-  private isInEncounter: boolean;
+  private message: String = '';
+  private isEscaped: boolean = false; // Must have an encounter before this can be true
   private catchRate: number; // base rate determined by digimon level
   private escapeRate: number; // base rate determined by digimon level
-  private digimon: Digimon; // Will need to feed a digimon into this
+  private digimon: Digimon = null; // Will need to feed a digimon into this
   private currentUser$ = { // This is temporary!
     id: 1,
     username: "admin",
@@ -40,9 +41,10 @@ export class EncounterComponent implements OnInit {
     let encounterValue: number = Math.floor(Math.random() * _DIGIDEX_SIZE_ + 1); // Random generated the Digimon id from 1 to 100.
     this.encounterService.getEncounter(encounterValue).subscribe(
       data => {
-        this.digimon = data;
+        this.digimon = data; // Stores an array of Digimon with a single entry
         this.setBaseRates();
-        this.isInEncounter = true;
+        this.isEscaped = false;
+        this.message = `A wild ${this.digimon[0].name} has appeared!`;
         console.log(this.digimon[0]);
       },
       err => {
@@ -75,14 +77,14 @@ export class EncounterComponent implements OnInit {
   }
 
   throwBall(): void {
+    this.message = 'You threw a ball!';
     let catchRoll: number = Math.floor(Math.random() * 101); // Random integer between 0 and 100
     if (catchRoll >= 100 - this.catchRate) { // successfully catches a pokemon if the roll is greater than the catch rate threshold
-                                                  // if catchRate = 10, then catchRoll must be at least 50 to catch the Digimon
-      console.log(`Caught the Digimon ${this.digimon[0].name}!`);
+     this.message += ` You caught the ${this.digimon[0].name}!`;
       this.saveDigimon();
     } else {
-      console.log(`Failed to catch ${this.digimon[0].name}!`)
-      this.escapeRate = this.escapeRate + 2; // Increases the escape chance by 10% if capture fails
+      this.message += ` You failed to catch ${this.digimon[0].name}! The Digimon has become more nervous around you!`;
+      this.escapeRate = this.escapeRate + 10; // Increases the escape chance by 10% if capture fails
       if (this.escapeRate > 100) {
         this.escapeRate = 100;
       }
@@ -102,8 +104,7 @@ export class EncounterComponent implements OnInit {
       this.escapeRate = 5;
     }
 
-    console.log(this.catchRate);
-    console.log(this.escapeRate);
+    this.message = `You threw some bait!`;
     this.rollForEscape();
   }
 
@@ -118,18 +119,16 @@ export class EncounterComponent implements OnInit {
     if (this.escapeRate > 100) {
       this.escapeRate = 100;
     }
-    console.log(this.catchRate);
-    console.log(this.escapeRate);
+    this.message = `You threw a rock!`;
     this.rollForEscape();
   }
 
   rollForEscape(): void {
     let escapeRoll: number = Math.floor(Math.random() * 101); // Random integer between 0 and 100
     if (escapeRoll > 100 - this.escapeRate) {
-      console.log("Digimon escaped!")
-      this.isInEncounter = false;
+      this.message += ` Oh no, the ${this.digimon[0].name} ran away!`;
+      this.isEscaped = true;
     }
-    // Add some logic to give a hint to the user if the Digimon is close to fleeing and/or has a high catch rate
   }
 
   saveDigimon() {
@@ -142,8 +141,8 @@ export class EncounterComponent implements OnInit {
         console.log("Server responded with success code", data); // This might not return a success code. Will need to be tested
       },
       err => {
+        this.message = `Warning: Failed to add ${this.digimon[0].name} to your collection due to a connection issue.`; // Add a retry method for this.
         console.log(err.error);
       });
   }
-
 }

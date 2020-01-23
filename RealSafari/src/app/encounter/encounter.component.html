@@ -1,15 +1,32 @@
 <div class="encounter-screen">
-    <div *ngIf="!isInEncounter">
-        <h4>Not currently in an encounter</h4> <br>
+    <div *ngIf="digimon === null">
+        <h4>You are not currently in an encounter.</h4> <br>
         <button type="button" class="btn btn-success" (click)="beginEncounter()">Find a Digimon</button>
-        
     </div>
-    <div *ngIf="isInEncounter">
-        <h4>Currently in an encounter!</h4>
-        <img src="{{digimon[0].img}}"/>
-        <button type="button" class="btn btn-success" (click)="throwBait()">Throw Bait</button>
-        <button type="button" class="btn btn-danger" (click)="throwRock()">Throw Rock</button>
-        <button type="button" class="btn btn-warn" (click)="throwBall()">Throw Ball</button>
+    <div *ngIf="digimon !== null">
+        <div *ngIf="!isEscaped && !isCaught">
+            <h4>Your chance encounter with a {{ digimon[0].name }} has begun!</h4>
+            <img src="{{digimon[0].img}}">
+            <button type="button" class="btn btn-success" (click)="throwBait()">Throw Bait</button>
+            <button type="button" class="btn btn-danger" (click)="throwRock()">Throw Rock</button>
+            <button type="button" class="btn btn-warn" (click)="throwBall()">Throw Ball</button>
+            <div *ngIf="(message !== '')">
+                <p name="message">{{ message }}</p>
+                <br>
+                Current catch chance: {{catchRate}}%.
+                <br>
+                Current escape chance: {{escapeRate}}%.
+            </div>
+        </div>
+        <div *ngIf="isEscaped">
+            <h4>Oh no, the Digimon escaped!</h4>
+            <img src="https://www.vippng.com/png/detail/221-2217750_poof-2-cartoon-cloud-vector.png" width="35%"><br>
+            <button type="button" class="btn btn-success" (click)="beginEncounter()">Try Again!</button>
+            <!-- <button type="button" class="btn btn-success" (click)="goToCollection()">Return to Your Collection</button> -->
+        </div>
+        <div *ngIf="isCaught">
+            <h4>Congratulations, you caught the {{ digimon[0].name }}!</h4>
+            <button type="button" class="btn btn-success" (click)="beginEncounter()">Catch More Digimon</button>
+            <!-- <button type="button" class="btn btn-success" (click)="goToCollection()">Return to Your Collection</button> -->
+        </div>
     </div>
-    encounter works!
-</div>
