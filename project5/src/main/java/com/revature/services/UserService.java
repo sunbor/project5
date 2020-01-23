@@ -1,10 +1,9 @@
 package com.revature.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.reavture.util.HibernateUtil;
@@ -13,9 +12,10 @@ import com.revature.models.User;
 public class UserService {
 
 	static Session session = HibernateUtil.getSession();
+	private static List<User> list = new ArrayList<>();
 
-	public static User findById(int id) {
-		return null; // connect to Database here
+	static {// sample data
+		list.add(new User(100, "test", "test", null));
 	}
 
 	public static User login(String username, String password) {
@@ -24,12 +24,16 @@ public class UserService {
 			Query<User> query = session.createQuery(hql);
 			query.setParameter("username", username);
 			query.setParameter("password", password);
-			List<User> list = query.list();
+			// List<User> list = query.list();
 			return list.get(0);
 		} catch (Exception e) {
-			//log error that there was no user found
+			// log error that there was no user found
 			return null;
 		}
+	}
+
+	public static User findById(int id) {
+		return null; // connect to Database here
 	}
 
 	public boolean ifUserExist(User user) {
