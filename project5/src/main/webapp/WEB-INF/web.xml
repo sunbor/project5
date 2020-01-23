@@ -9,6 +9,10 @@
 		<filter-name>CorsFilter</filter-name>
 		<filter-class>com.revature.util.CorsFilter</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- needed for ContextLoaderListener -->
 	<context-param>
@@ -34,4 +38,6 @@
 		<servlet-name>DispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
 </web-app>
+
