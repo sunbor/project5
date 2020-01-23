@@ -7,7 +7,7 @@
 
 	<filter>
 		<filter-name>CorsFilter</filter-name>
-		<filter-class>servlet.CorsFilter</filter-class>
+		<filter-class>com.revature.util.CorsFilter</filter-class>
 	</filter>
 
 	<!-- needed for ContextLoaderListener -->
