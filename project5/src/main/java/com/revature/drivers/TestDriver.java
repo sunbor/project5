@@ -11,9 +11,9 @@ import com.revature.repositories.IUserDao;
 public class TestDriver {
 	public static void main(String[] args) {
 		//testSaveUser();
-		//testSaveDigimon();
+		testSaveDigimon();
 		//testGetUserByUsername();
-		testGetUserByUsernameAndPassword();
+		//testGetUserByUsernameAndPassword();
 	}
 
 	private static void testSaveUser() {

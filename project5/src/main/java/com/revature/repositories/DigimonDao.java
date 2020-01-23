@@ -1,5 +1,7 @@
 package com.revature.repositories;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,18 @@ public class DigimonDao implements IDigimonDao {
 		Session s = sf.getCurrentSession();
 		s.save(d);
 		
+	}
+
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	@Override
+	public List<Digimon> getAll() {
+		Session s = sf.getCurrentSession();
+		List<Digimon> digiList = s.createCriteria(Digimon.class).list();
+		if(digiList.size() == 0) {
+			//TODO: log user not found
+			return null;
+		}
+		return digiList;
 	}
 
 	

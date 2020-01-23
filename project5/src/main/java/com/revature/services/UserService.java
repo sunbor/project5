@@ -3,13 +3,13 @@ package com.revature.services;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 
-import com.reavture.util.HibernateUtil;
 import com.revature.models.User;
+import com.revature.util.HibernateUtil;
 
+@Service
 public class UserService {
 
 	static Session session = HibernateUtil.getSession();
