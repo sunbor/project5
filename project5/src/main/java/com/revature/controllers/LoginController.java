@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.models.User;
@@ -17,7 +16,6 @@ public class LoginController {
 	IUserDao userDao;
 
 	@PostMapping("/login")
-	@ResponseBody
 	public ResponseEntity<User> login(@RequestBody User u){
 		System.out.println("inside post method");
 		return ResponseEntity.ok(userDao.getByUsernameAndPassword(u.getUsername(), u.getPassword()));
