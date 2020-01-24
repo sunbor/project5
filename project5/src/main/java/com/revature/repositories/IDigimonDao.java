@@ -9,5 +9,7 @@ public interface IDigimonDao {
 	public void save(Digimon d);
 	
 	public List<Digimon> getAll();
+	
+	public List<Digimon> getByUserId(int userId);
 
 }
