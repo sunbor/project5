@@ -9,17 +9,19 @@ import com.revature.repositories.IDigimonDao;
 import com.revature.repositories.IUserDao;
 
 public class TestDriver {
+	
+	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
 	public static void main(String[] args) {
-		//testSaveUser();
+		testSaveUser();
 		//testSaveDigimon();
 		//testGetUserByUsername();
-		testGetUserByUsernameAndPassword();
+		//testGetUserByUsernameAndPassword();
+		//testGetAllDigimon();
 	}
 
 	private static void testSaveUser() {
-		User testUser = new User(0, "testrob", "pass", null);
-		
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+		User testUser = new User(0, "testbob", "pass", null);
 		
 		IUserDao dao = (IUserDao) ac.getBean("userDao");
 		
@@ -28,10 +30,8 @@ public class TestDriver {
 	}
 	
 	private static void testSaveDigimon() {
-		Digimon testDigimon = new Digimon(0, "testDigi", "hi.jpg", "rookie", null);
-		
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-		
+		Digimon testDigimon = new Digimon(0, "testDigi2", "hello.jpg", "champion", null);
+				
 		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
 		
 		dao.save(testDigimon);
@@ -39,16 +39,20 @@ public class TestDriver {
 	}
 	
 	private static void testGetUserByUsername() {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		IUserDao dao = (IUserDao) ac.getBean("userDao");
 
 		System.out.println(dao.getByUsername("testbob"));
 	}
 	
 	private static void testGetUserByUsernameAndPassword() {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		IUserDao dao = (IUserDao) ac.getBean("userDao");
 
 		System.out.println(dao.getByUsernameAndPassword("testbob", "passs"));
+	}
+	
+	private static void testGetAllDigimon() {
+		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
+		
+		System.out.println(dao.getAll());
 	}
 }
