@@ -19,10 +19,10 @@ public class DigimonDao implements IDigimonDao {
 	
 	@Override
 	@Transactional
-	public void save(Digimon d) {
+	public boolean save(Digimon d) {
 		Session s = sf.getCurrentSession();
-		s.save(d);
-		
+		Integer resultId = (Integer) s.save(d);
+		return resultId.intValue() != 0;
 	}
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
