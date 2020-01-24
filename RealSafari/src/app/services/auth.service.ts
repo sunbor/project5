@@ -27,7 +27,7 @@ export class AuthService {
     }).subscribe( //
       data => { // if successful / 200's is returned
         console.log('logged in'); // prints error, not required
-        this.router.navigateByUrl('/home'); // the link to the next location
+        this.router.navigateByUrl('/encounter'); // the link to the next location
         this.currentUserStream.next(data); // sends user data to next location
       },
       err => { // if successful / 400's is returned
@@ -35,5 +35,10 @@ export class AuthService {
         this.loginErrorStream.next('Login Failed'); // sets error message?
       }
     );
+  }
+
+  logout() {
+    this.router.navigateByUrl('/login');
+    this.currentUserStream.next(null);
   }
 }
