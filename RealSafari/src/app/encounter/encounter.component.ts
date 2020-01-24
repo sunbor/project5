@@ -18,7 +18,7 @@ const _MEGA_ESCAPE_RATE_: number = 45;
 @Component({
   selector: 'app-encounter',
   templateUrl: './encounter.component.html',
-  styleUrls: ['./encounter.component.css']
+  styleUrls: ['./encounter.component.scss']
 })
 export class EncounterComponent implements OnInit {
   private message: String = '';
