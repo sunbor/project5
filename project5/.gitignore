@@ -3,3 +3,5 @@ src/main/webapp/WEB-INF/applicationContext.xml
 src/main/resources/applicationContext.xml
 .classpath
 .project
+.factorypath
+bin/
