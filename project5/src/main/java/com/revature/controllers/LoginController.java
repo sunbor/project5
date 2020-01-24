@@ -1,11 +1,13 @@
 package com.revature.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.LoginInfo;
 import com.revature.models.User;
 import com.revature.repositories.IUserDao;
 
@@ -33,9 +35,16 @@ public class LoginController {
 	// 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<User> login(@RequestBody User u){
+	public ResponseEntity<User> login(@RequestBody LoginInfo log){
 		System.out.println("inside post method");
-		return ResponseEntity.ok(userDao.getByUsernameAndPassword(u.getUsername(), u.getPassword()));
+		System.out.println("login request: " + log);
+		
+		User respUser = userDao.getByUsernameAndPassword(log.getUsername(), log.getPassword());
+		if(respUser == null) {
+			return new ResponseEntity<User>(HttpStatus.UNAUTHORIZED);
+		}
+		
+		return ResponseEntity.ok(respUser);
 		
 	}
 }

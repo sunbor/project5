@@ -49,6 +49,7 @@ public class UserDao implements IUserDao {
 			//TODO: log user not found
 			return null;
 		}
+		System.out.println(userList.get(0));
 		return userList.get(0);
 	}
 
