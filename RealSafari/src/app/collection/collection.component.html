@@ -1,2 +1,14 @@
 <app-navbar></app-navbar>
-<p>collection works!</p>
+<div class="card" *ngFor="let digi of digimon">
+    <div class="card-header text-center">
+        Name: {{digi.name}}
+    </div>
+    <ul class="digimon-info-toggle list-group list-group-flush" (click)="toggleInfo()">
+        <li class="list-group-item">Info</li>
+    </ul>
+    <div class="card-body" *ngIf="infoToggled">
+        <p>{{ digi.img }}</p>
+        <p>Digidex No.: {{ digi.id }}</p>
+        <p>Level: {{digi.level}}</p>
+    </div>
+</div>

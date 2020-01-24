@@ -15,7 +15,7 @@ export class EncounterService {
   }
 
   saveCatch(credentials) {
-    return this.http.post(`http://localhost:8080/project5/users?id=${credentials.user.id}/digimon`, credentials, { withCredentials: true });
+    return this.http.post(`http://localhost:8080/project5/users/${credentials.user.id}/digimon`, credentials, { withCredentials: true });
   }
 
 }
