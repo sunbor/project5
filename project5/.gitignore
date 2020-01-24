@@ -4,4 +4,3 @@ src/main/resources/applicationContext.xml
 .classpath
 .project
 .factorypath
-bin/
