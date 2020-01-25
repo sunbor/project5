@@ -27,7 +27,6 @@ public class CorsFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("is called");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		//logger.info(httpRequest.getMethod() + " request going to " + httpRequest.getRequestURI());

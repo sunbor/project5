@@ -15,8 +15,10 @@ public class DigimonController {
 	@Autowired
 	IDigimonDao digimonDao;
 	
-	@PostMapping("/digimon")
+	@PostMapping("/users/{id}/digimon")
 	public ResponseEntity<Boolean> saveDigimon(@RequestBody Digimon caughtDigimon) {
+		
+		System.out.println(caughtDigimon);
 		
 		boolean saveSuccess = digimonDao.save(caughtDigimon);
 		

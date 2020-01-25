@@ -25,6 +25,9 @@ public class Digimon {
 	private int digimonId;
 	
 	@Column(nullable=false)
+	private int digiDexId;
+	
+	@Column(nullable=false)
 	private String digimonName;
 	
 	@Column(nullable=false)
@@ -42,9 +45,10 @@ public class Digimon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Digimon(int digimonId, String digimonName, String imgUrl, String digimonLevel, User partner) {
+	public Digimon(int digimonId, int digiDexId, String digimonName, String imgUrl, String digimonLevel, User partner) {
 		super();
 		this.digimonId = digimonId;
+		this.digiDexId = digiDexId;
 		this.digimonName = digimonName;
 		this.imgUrl = imgUrl;
 		this.digimonLevel = digimonLevel;
@@ -57,6 +61,14 @@ public class Digimon {
 
 	public void setDigimonId(int digimonId) {
 		this.digimonId = digimonId;
+	}
+
+	public int getDigiDexId() {
+		return digiDexId;
+	}
+
+	public void setDigiDexId(int digiDexId) {
+		this.digiDexId = digiDexId;
 	}
 
 	public String getDigimonName() {
@@ -95,6 +107,7 @@ public class Digimon {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + digiDexId;
 		result = prime * result + digimonId;
 		result = prime * result + ((digimonLevel == null) ? 0 : digimonLevel.hashCode());
 		result = prime * result + ((digimonName == null) ? 0 : digimonName.hashCode());
@@ -112,6 +125,8 @@ public class Digimon {
 		if (getClass() != obj.getClass())
 			return false;
 		Digimon other = (Digimon) obj;
+		if (digiDexId != other.digiDexId)
+			return false;
 		if (digimonId != other.digimonId)
 			return false;
 		if (digimonLevel == null) {
@@ -139,10 +154,9 @@ public class Digimon {
 
 	@Override
 	public String toString() {
-		return "Digimon [digimonId=" + digimonId + ", digimonName=" + digimonName + ", imgUrl=" + imgUrl
-				+ ", digimonLevel=" + digimonLevel + ", partner=" + partner + "]";
+		return "Digimon [digimonId=" + digimonId + ", digiDexId=" + digiDexId + ", digimonName=" + digimonName
+				+ ", imgUrl=" + imgUrl + ", digimonLevel=" + digimonLevel + ", partner=" + partner + "]";
 	}
 
 
-	
 }

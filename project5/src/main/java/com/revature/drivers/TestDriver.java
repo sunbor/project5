@@ -13,7 +13,7 @@ public class TestDriver {
 	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	
 	public static void main(String[] args) {
-		//testSaveUser();
+		testSaveUser();
 		testSaveDigimon();
 		//testGetUserByUsername();
 		//testGetUserByUsernameAndPassword();
@@ -30,7 +30,7 @@ public class TestDriver {
 	}
 	
 	private static void testSaveDigimon() {
-		Digimon testDigimon = new Digimon(0, "testDigi2", "hello.jpg", "champion", null);
+		Digimon testDigimon = new Digimon(0, 0, "testDigi2", "hello.jpg", "champion", null);
 				
 		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
 		
