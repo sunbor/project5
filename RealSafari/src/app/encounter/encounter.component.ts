@@ -30,7 +30,6 @@ export class EncounterComponent implements OnInit {
   private escapeRate: number; // base rate determined by digimon level
   private digimon: Digimon = null; // Will need to feed a digimon into this
   currentUser: User;
-  currentUserId$: number;
 
 
   constructor(private encounterService: EncounterService,
@@ -143,7 +142,7 @@ export class EncounterComponent implements OnInit {
         "digimonName": this.digimon[0].name,
         "imgUrl": this.digimon[0].img,
         "digimonLevel": this.digimon[0].level,
-        "userId": this.currentUserId$
+        "userId": this.currentUser.userId
       }
     }
     console.log(digimon);
