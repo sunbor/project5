@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EncounterService, Digimon } from '../services/encounter.service';
+import { AuthService, User } from '../services/auth.service';
 
 const _DIGIDEX_SIZE_: number = 100; // how many different Digimon the API has, hard coded for now
 const _FRESH_CATCH_RATE_: number = 50;
@@ -21,19 +22,22 @@ const _MEGA_ESCAPE_RATE_: number = 45;
   styleUrls: ['./encounter.component.scss']
 })
 export class EncounterComponent implements OnInit {
+
   private message: String = '';
   private isEscaped: boolean = false; // Must have an encounter before this can be true
   private catchRate: number; // base rate determined by digimon level
   private escapeRate: number; // base rate determined by digimon level
   private digimon: Digimon = null; // Will need to feed a digimon into this
-  private currentUser$ = { // This is temporary!
-    id: 1,
-    username: "admin",
-  };
+  private currentUserId$: number;
+  
 
-  constructor(private encounterService: EncounterService) { }
+  constructor(private encounterService: EncounterService,
+              private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.$currentUser.subscribe((user: User) => {
+      this.currentUserId$ = user.id;
+    });
   }
 
 
@@ -55,7 +59,7 @@ export class EncounterComponent implements OnInit {
   };
 
   setBaseRates() {
-    if(this.digimon[0].level === "Fresh"){
+    if (this.digimon[0].level === "Fresh") {
       this.catchRate = _FRESH_CATCH_RATE_;
       this.escapeRate = _FRESH_ESCAPE_RATE_;
     } else if (this.digimon[0].level === "In Training") {
@@ -80,7 +84,7 @@ export class EncounterComponent implements OnInit {
     this.message = 'You threw a ball!';
     let catchRoll: number = Math.floor(Math.random() * 101); // Random integer between 0 and 100
     if (catchRoll >= 100 - this.catchRate) { // successfully catches a pokemon if the roll is greater than the catch rate threshold
-     this.message += ` You caught the ${this.digimon[0].name}!`;
+      this.message += ` You caught the ${this.digimon[0].name}!`;
       this.saveDigimon();
     } else {
       this.message += ` You failed to catch ${this.digimon[0].name}! The Digimon has become more nervous around you!`;
@@ -133,8 +137,14 @@ export class EncounterComponent implements OnInit {
 
   saveDigimon() {
     let saveInfo = {
-      "user": `${this.currentUser$}`, // will send current user's info
-      "digimon": `${this.digimon}` // will send the Digimon's data
+      "userId": `${this.currentUserId$}`, // will send current user's info
+      "digimon": {
+        "digimonId": 0,
+        "digidexId": this.digimon.id,
+        "digimonName": this.digimon.name,
+        "imgUrl": this.digimon.img,
+        "digimonLevel": this.digimon.level
+      }
     }
     this.encounterService.saveCatch(saveInfo).subscribe(
       data => {
