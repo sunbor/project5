@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Digimon } from '../services/encounter.service';
+import { DigimonFromDB } from '../services/encounter.service';
 import { HttpClient } from '@angular/common/http';
 import { User, AuthService } from '../services/auth.service';
 
@@ -10,7 +10,7 @@ import { User, AuthService } from '../services/auth.service';
 })
 export class CollectionComponent implements OnInit {
 
-  private digimon: Digimon[] = [];
+  private digimon: DigimonFromDB[] = [];
 
   constructor(private httpClient: HttpClient,
     private authService: AuthService) { }
@@ -19,7 +19,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.authService.$currentUser.subscribe((user: User) => {
-      this.httpClient.get<Digimon[]>(`http://localhost:8080/project5/users/${user.userId}/digimon`, {
+      this.httpClient.get<DigimonFromDB[]>(`http://localhost:8080/project5/users/${user.userId}/digimon`, {
         withCredentials: true
       })
         .subscribe(data => {
