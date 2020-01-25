@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EncounterService, Digimon, DigimonFromDB } from '../services/encounter.service';
 import { AuthService, User } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const _DIGIDEX_SIZE_: number = 100; // how many different Digimon the API has, hard coded for now
 const _FRESH_CATCH_RATE_: number = 50;
@@ -33,7 +35,7 @@ export class EncounterComponent implements OnInit {
 
 
   constructor(private encounterService: EncounterService,
-    private authService: AuthService) { }
+    private authService: AuthService, private router: Router, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.authService.$currentUser.subscribe((user: User) => {
@@ -86,6 +88,9 @@ export class EncounterComponent implements OnInit {
     if (catchRoll >= 100 - this.catchRate) { // successfully catches a pokemon if the roll is greater than the catch rate threshold
       this.message += ` You caught the ${this.digimon[0].name}!`;
       this.saveDigimon();
+     // alert('You just caught it! Lets go see it!')
+     // insert snackbar method here
+     this.snackMessage();
     } else {
       this.message += ` You failed to catch ${this.digimon[0].name}! The Digimon has become more nervous around you!`;
       this.escapeRate = this.escapeRate + 10; // Increases the escape chance by 10% if capture fails
@@ -155,4 +160,12 @@ export class EncounterComponent implements OnInit {
         console.log(err);
       });
   }
+snackMessage() {
+let snackBarRef = this.snackbar.open('You just got the Digimon!!', 'View Your Collection', {duration: 30000}); 
+snackBarRef.onAction().subscribe(() => {
+  this.router.navigateByUrl('/collection')
+});
 }
+
+}
+

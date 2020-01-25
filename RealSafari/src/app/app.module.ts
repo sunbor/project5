@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,7 +26,10 @@ import { CollectionComponent } from './collection/collection.component';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
