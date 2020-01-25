@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EncounterService, Digimon } from '../services/encounter.service';
+import { EncounterService, Digimon, DigimonFromDB } from '../services/encounter.service';
 import { AuthService, User } from '../services/auth.service';
 
 const _DIGIDEX_SIZE_: number = 100; // how many different Digimon the API has, hard coded for now
@@ -136,14 +136,12 @@ export class EncounterComponent implements OnInit {
   }
 
   saveDigimon() {
-    let digimon = {
-      "digimon": {
-        "digidexId": this.digimon[0].id,
-        "digimonName": this.digimon[0].name,
-        "imgUrl": this.digimon[0].img,
-        "digimonLevel": this.digimon[0].level,
-        "userId": this.currentUser.userId
-      }
+    let digimon: DigimonFromDB = {
+        digidexId: this.digimon[0].id,
+        digimonName: this.digimon[0].name,
+        imgUrl: this.digimon[0].img,
+        digimonLevel: this.digimon[0].level,
+        userId: this.currentUser.userId
     }
     console.log(digimon);
     this.encounterService.saveCatch(digimon).subscribe(
@@ -154,7 +152,7 @@ export class EncounterComponent implements OnInit {
       err => {
         this.message = `Warning: Failed to add ${this.digimon[0].name} to your collection due to a connection issue.`; // Add a retry method for this.
         this.needsResend = true;
-        console.log(err.error);
+        console.log(err);
       });
   }
 }

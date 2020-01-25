@@ -24,3 +24,10 @@ export interface Digimon {
   img: String;
   level: String;
 }
+export interface DigimonFromDB {
+    digidexId: number,
+    digimonName: String,
+    imgUrl: String,
+    digimonLevel: String,
+    userId: number
+}
