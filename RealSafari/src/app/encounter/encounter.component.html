@@ -14,7 +14,7 @@
             <div *ngIf="(message !== '')">
                 <p name="message">{{ message }}</p>
                 <br>
-                <p *ngIf="!isCaught">Current catch chance: {{catchRate}}%.
+                <p *ngIf="!needsResend && !isCaught">Current catch chance: {{catchRate}}%.
                     <br>
                     Current escape chance: {{escapeRate}}%.
                 </p>
