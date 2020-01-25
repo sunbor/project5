@@ -45,6 +45,8 @@ public class DigimonController {
 		//save to database
 		boolean saveSuccess = digimonDao.save(saveDigimon);
 		
+		System.out.println(saveSuccess);
+		
 		if(saveSuccess) {
 			return ResponseEntity.ok(saveSuccess);
 		}
