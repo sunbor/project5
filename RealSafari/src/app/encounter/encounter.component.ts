@@ -139,14 +139,14 @@ export class EncounterComponent implements OnInit {
   saveDigimon() {
     let digimon = {
       "digimon": {
-        "digimonId": 0,
         "digidexId": this.digimon.id,
         "digimonName": this.digimon.name,
         "imgUrl": this.digimon.img,
-        "digimonLevel": this.digimon.level
+        "digimonLevel": this.digimon.level,
+        "userId": this.currentUserId$
       }
     }
-    this.encounterService.saveCatch(this.currentUserId$, digimon).subscribe(
+    this.encounterService.saveCatch(digimon).subscribe(
       data => {
         console.log("Server responded with success code", data); // This might not return a success code. Will need to be tested
         this.needsResend = false;
