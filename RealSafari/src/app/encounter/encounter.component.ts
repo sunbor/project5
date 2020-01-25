@@ -24,6 +24,7 @@ const _MEGA_ESCAPE_RATE_: number = 45;
 export class EncounterComponent implements OnInit {
 
   private message: String = '';
+  private needsResend: boolean = false; // Is used to allow the user to attempt to resend the save request
   private isEscaped: boolean = false; // Must have an encounter before this can be true
   private catchRate: number; // base rate determined by digimon level
   private escapeRate: number; // base rate determined by digimon level
@@ -136,22 +137,23 @@ export class EncounterComponent implements OnInit {
   }
 
   saveDigimon() {
-    let saveInfo = {
-      "userId": `${this.currentUserId$}`, // will send current user's info
+    let digimon = {
       "digimon": {
-        "digimonId": 0,
         "digidexId": this.digimon.id,
         "digimonName": this.digimon.name,
         "imgUrl": this.digimon.img,
-        "digimonLevel": this.digimon.level
+        "digimonLevel": this.digimon.level,
+        "userId": this.currentUserId$
       }
     }
-    this.encounterService.saveCatch(saveInfo).subscribe(
+    this.encounterService.saveCatch(digimon).subscribe(
       data => {
         console.log("Server responded with success code", data); // This might not return a success code. Will need to be tested
+        this.needsResend = false;
       },
       err => {
         this.message = `Warning: Failed to add ${this.digimon[0].name} to your collection due to a connection issue.`; // Add a retry method for this.
+        this.needsResend = true;
         console.log(err.error);
       });
   }

@@ -14,9 +14,13 @@
             <div *ngIf="(message !== '')">
                 <p name="message">{{ message }}</p>
                 <br>
-                Current catch chance: {{catchRate}}%.
-                <br>
-                Current escape chance: {{escapeRate}}%.
+                <p *ngIf="!isCaught">Current catch chance: {{catchRate}}%.
+                    <br>
+                    Current escape chance: {{escapeRate}}%.
+                </p>
+                <div *ngIf="needsResend">
+                    <button type="button" class="btn btn-warn" (click)="saveDigimon()">Retry Save</button>
+                </div>
             </div>
         </div>
         <div *ngIf="isEscaped">
