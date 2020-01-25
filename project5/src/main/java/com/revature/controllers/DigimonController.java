@@ -68,7 +68,12 @@ public class DigimonController {
 		
 		List<Digimon> digimonList = userDao.getById(id).getParty();
 		
-		return ResponseEntity.ok(digimonList);
+		if(digimonList == null) {
+			return new ResponseEntity<List<Digimon>>(HttpStatus.NO_CONTENT);
+		}
+		else {
+			return ResponseEntity.ok(digimonList);
+		}
 	}
 
 }
