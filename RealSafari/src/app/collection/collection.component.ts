@@ -10,7 +10,6 @@ import { User, AuthService } from '../services/auth.service';
 })
 export class CollectionComponent implements OnInit {
 
-  private currentUserId$: number;
   private digimon: Digimon[] = [];
 
   constructor(private httpClient: HttpClient,
@@ -20,8 +19,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.authService.$currentUser.subscribe((user: User) => {
-      this.currentUserId$ = user.id;
-      this.httpClient.get<Digimon[]>(`http://localhost:8080/project5/users/${this.currentUserId$}`, {
+      this.httpClient.get<Digimon[]>(`http://localhost:8080/project5/users/${user.userId}`, {
         withCredentials: true
       })
         .subscribe(data => {

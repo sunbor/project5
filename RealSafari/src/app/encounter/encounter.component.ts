@@ -29,18 +29,18 @@ export class EncounterComponent implements OnInit {
   private catchRate: number; // base rate determined by digimon level
   private escapeRate: number; // base rate determined by digimon level
   private digimon: Digimon = null; // Will need to feed a digimon into this
-  private currentUserId$: number;
-  
+  currentUser: User;
+  currentUserId$: number;
+
 
   constructor(private encounterService: EncounterService,
-              private authService: AuthService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.$currentUser.subscribe((user: User) => {
-      this.currentUserId$ = user.id;
+      this.currentUser = user;
     });
   }
-
 
   beginEncounter() {
     let encounterValue: number = Math.floor(Math.random() * _DIGIDEX_SIZE_ + 1); // Random generated the Digimon id from 1 to 100.
@@ -146,6 +146,7 @@ export class EncounterComponent implements OnInit {
         "userId": this.currentUserId$
       }
     }
+    console.log(digimon);
     this.encounterService.saveCatch(digimon).subscribe(
       data => {
         console.log("Server responded with success code", data); // This might not return a success code. Will need to be tested
