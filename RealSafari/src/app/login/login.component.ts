@@ -8,7 +8,6 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  user = '';
 
   credentials = {
     username: '',

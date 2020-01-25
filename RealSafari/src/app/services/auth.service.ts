@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../model/user.model';
 import { ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({
@@ -23,16 +22,16 @@ export class AuthService {
 
   login(credentials: any) { //
     this.httpClient.post<User>('http://localhost:8080/project5/login', credentials, {
-      withCredentials: true // processes only if cedentials are filled ?
+      withCredentials: true // processes only if credentials are filled ?
     }).subscribe( //
       data => { // if successful / 200's is returned
         console.log('logged in'); // prints error, not required
         this.router.navigateByUrl('/encounter'); // the link to the next location
         this.currentUserStream.next(data); // sends user data to next location
       },
-      err => { // if successful / 400's is returned
+      err => { // if unsuccessful / 400's is returned
         console.log(err); // prints error, not required
-        this.loginErrorStream.next('Login Failed'); // sets error message?
+        this.loginErrorStream.next('Login Failed'); // sets error message
       }
     );
   }
@@ -40,4 +39,11 @@ export class AuthService {
   logout() {
     this.currentUserStream.next(null);
   }
+
+}
+
+export interface User {
+  id: number;
+  username: String;
+  password: String;
 }

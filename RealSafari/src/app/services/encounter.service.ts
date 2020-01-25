@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +13,7 @@ export class EncounterService {
   }
 
   saveCatch(credentials) {
-    return this.http.post(`http://localhost:8080/project5/users/${credentials.user.id}/digimon`, credentials, { withCredentials: true });
+    return this.http.post(`http://localhost:8080/project5/users/${credentials.userId}/digimon`, credentials, { withCredentials: true });
   }
 
 }
