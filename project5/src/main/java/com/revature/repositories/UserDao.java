@@ -69,4 +69,18 @@ public class UserDao implements IUserDao {
 		
 	}
 
+	@Override
+	@Transactional
+	public User getById(int id) {
+		Session s = sf.getCurrentSession();
+		User u = s.get(User.class, id);
+		
+		if(u == null) {
+			//TODO: log error
+			return null;
+		}else {
+			return u;
+		}
+	}
+
 }

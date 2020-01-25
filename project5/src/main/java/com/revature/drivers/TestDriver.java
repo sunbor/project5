@@ -11,13 +11,16 @@ import com.revature.repositories.IUserDao;
 public class TestDriver {
 	
 	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+	private static IUserDao userDao = (IUserDao) ac.getBean("userDao");
+	private static IDigimonDao digiDao = (IDigimonDao) ac.getBean("digimonDao");
 	
 	public static void main(String[] args) {
-		testSaveUser();
-		testSaveDigimon();
+		//testSaveUser();
+		//testSaveDigimon();
 		//testGetUserByUsername();
 		//testGetUserByUsernameAndPassword();
 		//testGetAllDigimon();
+		testGetUserById();
 	}
 
 	private static void testSaveUser() {
@@ -54,5 +57,9 @@ public class TestDriver {
 		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
 		
 		System.out.println(dao.getAll());
+	}
+	
+	private static void testGetUserById() {
+		System.out.println(userDao.getById(202));
 	}
 }

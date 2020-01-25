@@ -10,6 +10,8 @@ public interface IUserDao {
 	
 	public User getByUsernameAndPassword(String username, String password);
 	
+	public User getById(int id);
+	
 	//for testing
 	public List<User> getAll();
 	

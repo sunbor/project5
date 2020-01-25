@@ -13,6 +13,7 @@ export class EncounterService {
   }
 
   saveCatch(digimon) {
+    console.log(digimon);
     return this.http.post(`http://localhost:8080/project5/users/${digimon.userId}/digimon`, digimon, { withCredentials: true });
   }
 
