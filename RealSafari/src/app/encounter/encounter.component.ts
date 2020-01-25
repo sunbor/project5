@@ -139,10 +139,10 @@ export class EncounterComponent implements OnInit {
   saveDigimon() {
     let digimon = {
       "digimon": {
-        "digidexId": this.digimon.id,
-        "digimonName": this.digimon.name,
-        "imgUrl": this.digimon.img,
-        "digimonLevel": this.digimon.level,
+        "digidexId": this.digimon[0].id,
+        "digimonName": this.digimon[0].name,
+        "imgUrl": this.digimon[0].img,
+        "digimonLevel": this.digimon[0].level,
         "userId": this.currentUserId$
       }
     }
