@@ -13,7 +13,7 @@ public class TestDriver {
 	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	
 	public static void main(String[] args) {
-		//testSaveUser();
+		testSaveUser();
 		testSaveDigimon();
 		//testGetUserByUsername();
 		//testGetUserByUsernameAndPassword();
