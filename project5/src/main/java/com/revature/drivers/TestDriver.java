@@ -20,7 +20,8 @@ public class TestDriver {
 		//testGetUserByUsername();
 		//testGetUserByUsernameAndPassword();
 		//testGetAllDigimon();
-		testGetUserById();
+		//testGetUserById();
+		testGetDigimonByUserId();
 	}
 
 	private static void testSaveUser() {
@@ -61,5 +62,9 @@ public class TestDriver {
 	
 	private static void testGetUserById() {
 		System.out.println(userDao.getById(202));
+	}
+	
+	private static void testGetDigimonByUserId() {
+		System.out.println(digiDao.getByUserId(202));
 	}
 }

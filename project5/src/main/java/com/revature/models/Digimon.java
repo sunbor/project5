@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="digimon")
 @Component
@@ -22,7 +24,7 @@ public class Digimon {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="digimon_seq_gen")
 	@SequenceGenerator(name="digimon_seq_gen", sequenceName="digimon_id_seq")
 	@Column(name = "digimon_id")
-	private int digimonId;
+	private Integer digimonId;
 	
 	@Column(nullable=false)
 	private int digiDexId;
@@ -36,6 +38,7 @@ public class Digimon {
 	@Column(nullable=false)
 	private String digimonLevel;
 	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="User_FK")
 	private User partner;
@@ -45,7 +48,8 @@ public class Digimon {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Digimon(int digimonId, int digiDexId, String digimonName, String imgUrl, String digimonLevel, User partner) {
+	public Digimon(Integer digimonId, int digiDexId, String digimonName, String imgUrl, String digimonLevel,
+			User partner) {
 		super();
 		this.digimonId = digimonId;
 		this.digiDexId = digiDexId;
@@ -55,11 +59,11 @@ public class Digimon {
 		this.partner = partner;
 	}
 
-	public int getDigimonId() {
+	public Integer getDigimonId() {
 		return digimonId;
 	}
 
-	public void setDigimonId(int digimonId) {
+	public void setDigimonId(Integer digimonId) {
 		this.digimonId = digimonId;
 	}
 
@@ -108,7 +112,7 @@ public class Digimon {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + digiDexId;
-		result = prime * result + digimonId;
+		result = prime * result + ((digimonId == null) ? 0 : digimonId.hashCode());
 		result = prime * result + ((digimonLevel == null) ? 0 : digimonLevel.hashCode());
 		result = prime * result + ((digimonName == null) ? 0 : digimonName.hashCode());
 		result = prime * result + ((imgUrl == null) ? 0 : imgUrl.hashCode());
@@ -127,7 +131,10 @@ public class Digimon {
 		Digimon other = (Digimon) obj;
 		if (digiDexId != other.digiDexId)
 			return false;
-		if (digimonId != other.digimonId)
+		if (digimonId == null) {
+			if (other.digimonId != null)
+				return false;
+		} else if (!digimonId.equals(other.digimonId))
 			return false;
 		if (digimonLevel == null) {
 			if (other.digimonLevel != null)
@@ -155,7 +162,7 @@ public class Digimon {
 	@Override
 	public String toString() {
 		return "Digimon [digimonId=" + digimonId + ", digiDexId=" + digiDexId + ", digimonName=" + digimonName
-				+ ", imgUrl=" + imgUrl + ", digimonLevel=" + digimonLevel + ", partner=" + partner + "]";
+				+ ", imgUrl=" + imgUrl + ", digimonLevel=" + digimonLevel + "]";
 	}
 
 

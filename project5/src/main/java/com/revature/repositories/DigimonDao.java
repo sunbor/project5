@@ -38,7 +38,10 @@ public class DigimonDao implements IDigimonDao {
 		return digiList;
 	}
 
+	
+	//stupid broken garbage
 	@Override
+	@Transactional
 	public List<Digimon> getByUserId(int userId) {
 		Session s = sf.getCurrentSession();
 		List<Digimon> digiList = s.createCriteria(Digimon.class).add(Restrictions.like("partner", userId)).list();

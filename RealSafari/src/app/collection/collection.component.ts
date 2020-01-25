@@ -19,6 +19,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.authService.$currentUser.subscribe((user: User) => {
+      console.log(user.userId);
       this.httpClient.get<DigimonFromDB[]>(`http://localhost:8080/project5/users/${user.userId}/digimon`, {
         withCredentials: true
       })

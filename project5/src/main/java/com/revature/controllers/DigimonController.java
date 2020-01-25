@@ -1,8 +1,12 @@
 package com.revature.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +57,18 @@ public class DigimonController {
 		else {
 			return new ResponseEntity<Boolean>(HttpStatus.BAD_GATEWAY);
 		}
+	}
+	
+	@GetMapping("/users/{id}/digimon")
+	public ResponseEntity<List<Digimon>> getDigimonList(@PathVariable("id") int id){
+		//just call the dao
+		//have status code feedback and stuff
+				
+		System.out.println("does it get here and what is id if so" + id);
+		
+		List<Digimon> digimonList = userDao.getById(id).getParty();
+		
+		return ResponseEntity.ok(digimonList);
 	}
 
 }

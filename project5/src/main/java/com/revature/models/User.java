@@ -2,6 +2,7 @@ package com.revature.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="users")
 @Component
@@ -23,7 +26,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="user_seq_gen")
 	@SequenceGenerator(name="user_seq_gen", sequenceName="user_id_seq")
 	@Column(name = "user_id")
-	private int userId;
+	private Integer userId;
 	
 	@Column(nullable=false,unique=true)
 	private String username;
@@ -31,14 +34,16 @@ public class User {
 	@Column(nullable=false)
 	private String password;
 	
-	@OneToMany(mappedBy="partner", fetch=FetchType.EAGER)
+	@JsonManagedReference
+	@OneToMany(mappedBy="partner", targetEntity = Digimon.class, cascade = CascadeType.ALL,  fetch=FetchType.EAGER)
 	private List<Digimon> party;
 
 	public User() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userId, String username, String password, List<Digimon> party) {
+	public User(Integer userId, String username, String password, List<Digimon> party) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -46,11 +51,11 @@ public class User {
 		this.party = party;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -84,7 +89,7 @@ public class User {
 		int result = 1;
 		result = prime * result + ((party == null) ? 0 : party.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + userId;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -108,7 +113,10 @@ public class User {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (userId != other.userId)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -123,7 +131,7 @@ public class User {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", party=" + party
 				+ "]";
 	}
-	
-	
+
+
 
 }
