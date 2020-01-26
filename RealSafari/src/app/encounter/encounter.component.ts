@@ -34,8 +34,6 @@ export class EncounterComponent implements OnInit {
   private digimon: Digimon = null; // Will need to feed a digimon into this
   currentUser: User;
 
-  url = '../../resources/power.png';
-
   constructor(private encounterService: EncounterService,
     private authService: AuthService, private router: Router
     //private snackbar: MatSnackBar
