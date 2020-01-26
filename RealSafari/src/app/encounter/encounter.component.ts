@@ -94,7 +94,7 @@ export class EncounterComponent implements OnInit {
       this.saveDigimon();
      // alert('You just caught it! Lets go see it!')
      // insert snackbar method here
-     this.snackMessage();
+     //this.snackMessage();
     } else {
       this.message += ` You failed to catch ${this.digimon[0].name}! The Digimon has become more nervous around you!`;
       this.escapeRate = this.escapeRate + 10; // Increases the escape chance by 10% if capture fails
