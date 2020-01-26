@@ -55,11 +55,10 @@ export class EncounterComponent implements OnInit {
         this.isCaught = false;
         this.isEscaped = false;
         this.message = `A wild ${this.digimon[0].name} has appeared!`;
-        console.log(this.digimon[0]);
       },
       err => {
         console.log(`An error occured when getting Digimon with id: ${encounterValue}.`)
-        console.log(err.error);
+        console.log(err);
       }
     );
   };
