@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -29,7 +28,6 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatSnackBarModule,
     BrowserAnimationsModule,
     NoopAnimationsModule
   ],
