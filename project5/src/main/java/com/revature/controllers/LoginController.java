@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import com.revature.repositories.IUserDao;
 @RestController
 public class LoginController {
 	
+	private static Logger logger = LogManager.getLogger(LoginController.class);
+	
 	@Autowired
 	IUserDao userDao;
 
@@ -24,7 +28,6 @@ public class LoginController {
 	// // this looks good, explore web.xml to avoid CORS errors
 	// @RequestMapping(value = "/login", method = RequestMethod.POST)
 	// public ResponseEntity<User> login(@RequestBody LoginInfo u) {
-	// 	System.out.println("we're here");
 	// 	String username = u.getUsername();
 	// 	String password = u.getPassword();
 	// 	User loggedIn = dao.getByUsernameAndPassword(username, password);
@@ -36,8 +39,8 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<User> login(@RequestBody LoginInfo log){
-		System.out.println("inside post method");
-		System.out.println("login request: " + log);
+		logger.trace("inside post method");
+		logger.trace("login request: " + log);
 		
 		User respUser = userDao.getByUsernameAndPassword(log.getUsername(), log.getPassword());
 		if(respUser == null) {
@@ -51,7 +54,7 @@ public class LoginController {
 	@PostMapping("/users")
 	public ResponseEntity<User> register(@RequestBody LoginInfo reg){
 		
-		System.out.println(reg);
+		logger.trace(reg);
 		
 		//check if username is already taken
 		if(userDao.getByUsername(reg.getUsername()) != null) {

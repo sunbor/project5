@@ -3,6 +3,8 @@ package com.revature.controllers;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import com.revature.util.DexIdSort;
 @RestController
 public class DigimonController {
 	
+	private static Logger logger = LogManager.getLogger(DigimonController.class);
+	
 	@Autowired
 	IDigimonDao digimonDao;
 	
@@ -37,7 +41,7 @@ public class DigimonController {
 		//assign user object to digimon
 		//save digimon
 		
-		System.out.println(caughtDigimon);
+		logger.trace(caughtDigimon);
 		
 		//get user object from database
 		User currentUser = userDao.getById(caughtDigimon.getUserId());
@@ -53,7 +57,7 @@ public class DigimonController {
 		//save to database
 		boolean saveSuccess = digimonDao.save(saveDigimon);
 		
-		System.out.println(saveSuccess);
+		logger.trace(saveSuccess);
 		
 		if(saveSuccess) {
 			return ResponseEntity.ok(saveSuccess);
@@ -68,7 +72,7 @@ public class DigimonController {
 		//just call the dao
 		//have status code feedback and stuff
 				
-		System.out.println("does it get here and what is id if so" + id);
+		logger.trace("id: " + id);
 		
 		List<Digimon> digimonList = userDao.getById(id).getParty();
         Collections.sort(digimonList, new DexIdSort()); 

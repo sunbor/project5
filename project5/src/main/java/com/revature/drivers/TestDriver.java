@@ -1,8 +1,11 @@
 package com.revature.drivers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.revature.controllers.DigimonController;
 import com.revature.models.Digimon;
 import com.revature.models.User;
 import com.revature.repositories.IDigimonDao;
@@ -13,6 +16,8 @@ public class TestDriver {
 	private static ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 	private static IUserDao userDao = (IUserDao) ac.getBean("userDao");
 	private static IDigimonDao digiDao = (IDigimonDao) ac.getBean("digimonDao");
+	
+	private static Logger logger = LogManager.getLogger(TestDriver.class);
 	
 	public static void main(String[] args) {
 		//testSaveUser();
@@ -38,33 +43,33 @@ public class TestDriver {
 				
 		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
 		
-		System.out.println(dao.save(testDigimon));
+		logger.info(dao.save(testDigimon));
 		
 	}
 	
 	private static void testGetUserByUsername() {
 		IUserDao dao = (IUserDao) ac.getBean("userDao");
 
-		System.out.println(dao.getByUsername("testbob"));
+		logger.info(dao.getByUsername("testbob"));
 	}
 	
 	private static void testGetUserByUsernameAndPassword() {
 		IUserDao dao = (IUserDao) ac.getBean("userDao");
 
-		System.out.println(dao.getByUsernameAndPassword("testbob", "passs"));
+		logger.info(dao.getByUsernameAndPassword("testbob", "passs"));
 	}
 	
 	private static void testGetAllDigimon() {
 		IDigimonDao dao = (IDigimonDao) ac.getBean("digimonDao");
 		
-		System.out.println(dao.getAll());
+		logger.info(dao.getAll());
 	}
 	
 	private static void testGetUserById() {
-		System.out.println(userDao.getById(202));
+		logger.info(userDao.getById(202));
 	}
 	
 	private static void testGetDigimonByUserId() {
-		System.out.println(digiDao.getByUserId(202));
+		logger.info(digiDao.getByUserId(202));
 	}
 }
