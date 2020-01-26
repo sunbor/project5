@@ -25,7 +25,7 @@ export interface Digimon {
   level: String;
 }
 export interface DigimonFromDB {
-    digidexId: number,
+    digiDexId: number,
     digimonName: String,
     imgUrl: String,
     digimonLevel: String,

@@ -21,7 +21,7 @@ public class TestDriver {
 		//testGetUserByUsernameAndPassword();
 		//testGetAllDigimon();
 		//testGetUserById();
-		testGetDigimonByUserId();
+		//testGetDigimonByUserId();
 	}
 
 	private static void testSaveUser() {
