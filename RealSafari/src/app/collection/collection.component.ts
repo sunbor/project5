@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DigimonFromDB } from '../services/encounter.service';
 import { HttpClient } from '@angular/common/http';
 import { User, AuthService } from '../services/auth.service';
-import { timingSafeEqual } from 'crypto';
+// import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-collection',

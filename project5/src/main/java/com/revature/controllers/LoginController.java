@@ -51,6 +51,8 @@ public class LoginController {
 	@PostMapping("/users")
 	public ResponseEntity<User> register(@RequestBody LoginInfo reg){
 		
+		System.out.println(reg);
+		
 		//check if username is already taken
 		if(userDao.getByUsername(reg.getUsername()) != null) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
