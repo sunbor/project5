@@ -2,6 +2,8 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +17,8 @@ import com.revature.models.User;
 @Repository
 public class UserDao implements IUserDao {
 	
+	private static Logger logger = LogManager.getLogger(UserDao.class);
+	
 	@Autowired
 	private SessionFactory sf;
 
@@ -27,7 +31,7 @@ public class UserDao implements IUserDao {
 
 		List<User> userList = s.createCriteria(User.class).add(Restrictions.like("username", username)).list();
 		if(userList.size()==0) {
-			//TODO: log that user is not found
+			logger.warn("user not found");
 			return null;
 		}
 		return userList.get(0);
@@ -46,10 +50,10 @@ public class UserDao implements IUserDao {
 		List<User> userList = cri.list();
 		
 		if(userList.size()==0) {
-			//TODO: log user not found
+			logger.warn("user not found");
 			return null;
 		}
-		System.out.println(userList.get(0));
+		logger.trace(userList.get(0));
 		return userList.get(0);
 	}
 
@@ -76,7 +80,7 @@ public class UserDao implements IUserDao {
 		User u = s.get(User.class, id);
 		
 		if(u == null) {
-			//TODO: log error
+			logger.warn("user not found");
 			return null;
 		}else {
 			return u;

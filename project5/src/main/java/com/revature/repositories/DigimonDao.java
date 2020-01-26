@@ -2,6 +2,8 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.revature.controllers.DigimonController;
 import com.revature.models.Digimon;
 
 @Repository
 public class DigimonDao implements IDigimonDao {
+	
+	private static Logger logger = LogManager.getLogger(DigimonDao.class);
 	
 	@Autowired
 	private SessionFactory sf;
@@ -33,7 +38,7 @@ public class DigimonDao implements IDigimonDao {
 		Session s = sf.getCurrentSession();
 		List<Digimon> digiList = s.createCriteria(Digimon.class).list();
 		if(digiList.size() == 0) {
-			//TODO: log user not found
+			logger.warn("digimon not found");
 			return null;
 		}
 		return digiList;
@@ -55,7 +60,7 @@ public class DigimonDao implements IDigimonDao {
 		Session s = sf.getCurrentSession();
 		List<Digimon> digiList = s.createCriteria(Digimon.class).add(Restrictions.like("partner", userId)).list();
 		if(digiList.size() == 0) {
-			//TODO: log no digimon owned
+			logger.warn("no digimon found");
 			return null;
 		}
 		return digiList;
