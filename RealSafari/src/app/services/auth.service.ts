@@ -23,7 +23,7 @@ export class AuthService {
   login(credentials: any) { //
     this.httpClient.post<User>('http://localhost:8080/project5/login', credentials, {
       withCredentials: true // processes only if credentials are filled ?
-    }).subscribe( //
+    }).subscribe( // 
       data => { // if successful / 200's is returned
         console.log('logged in'); // prints error, not required
         this.router.navigateByUrl('/encounter'); // the link to the next location

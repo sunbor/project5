@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: gbFonts;
+    src: url(resources/PokemonGb-RAeo.ttf);
+  }
+
+body {
+    background: url("resources/BG.png") no-repeat center fixed, linear-gradient(#f2af00, #f3ad00);
+    font-family: gbFonts;
+    padding:0px;
+  }
+
+
+.container {
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
