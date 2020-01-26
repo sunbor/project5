@@ -27,6 +27,7 @@ export class EncounterComponent implements OnInit {
 
   private message: String = '';
   private needsResend: boolean = false; // Is used to allow the user to attempt to resend the save request
+  private isCaught: boolean = false;
   private isEscaped: boolean = false; // Must have an encounter before this can be true
   private catchRate: number; // base rate determined by digimon level
   private escapeRate: number; // base rate determined by digimon level
@@ -49,6 +50,7 @@ export class EncounterComponent implements OnInit {
       data => {
         this.digimon = data; // Stores an array of Digimon with a single entry
         this.setBaseRates();
+        this.isCaught = false;
         this.isEscaped = false;
         this.message = `A wild ${this.digimon[0].name} has appeared!`;
         console.log(this.digimon[0]);
@@ -148,10 +150,9 @@ export class EncounterComponent implements OnInit {
         digimonLevel: this.digimon[0].level,
         userId: this.currentUser.userId
     }
-    console.log(digimon);
+    this.isCaught = true;
     this.encounterService.saveCatch(digimon).subscribe(
       data => {
-        console.log("Server responded with success code", data); // This might not return a success code. Will need to be tested
         this.needsResend = false;
       },
       err => {
@@ -161,7 +162,7 @@ export class EncounterComponent implements OnInit {
       });
   }
 snackMessage() {
-let snackBarRef = this.snackbar.open('You just got the Digimon!!', 'View Your Collection', {duration: 30000}); 
+let snackBarRef = this.snackbar.open(`You just got the Digimon!!`, 'View Your Collection', {duration: 30000}); 
 snackBarRef.onAction().subscribe(() => {
   this.router.navigateByUrl('/collection')
 });
