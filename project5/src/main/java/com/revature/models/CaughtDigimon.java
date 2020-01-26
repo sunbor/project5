@@ -2,7 +2,7 @@ package com.revature.models;
 
 public class CaughtDigimon {
 	    
-    private int digidexId;
+    private int digiDexId;
     private String digimonName;
     private String imgUrl;
     private String digimonLevel;
@@ -11,19 +11,19 @@ public class CaughtDigimon {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public CaughtDigimon(int digidexId, String digimonName, String imgUrl, String digimonLevel, int userId) {
+	public CaughtDigimon(int digiDexId, String digimonName, String imgUrl, String digimonLevel, int userId) {
 		super();
-		this.digidexId = digidexId;
+		this.digiDexId = digiDexId;
 		this.digimonName = digimonName;
 		this.imgUrl = imgUrl;
 		this.digimonLevel = digimonLevel;
 		this.userId = userId;
 	}
-	public int getDigidexId() {
-		return digidexId;
+	public int getDigiDexId() {
+		return digiDexId;
 	}
-	public void setDigidexId(int digidexId) {
-		this.digidexId = digidexId;
+	public void setDigiDexId(int digiDexId) {
+		this.digiDexId = digiDexId;
 	}
 	public String getDigimonName() {
 		return digimonName;
@@ -53,7 +53,7 @@ public class CaughtDigimon {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + digidexId;
+		result = prime * result + digiDexId;
 		result = prime * result + ((digimonLevel == null) ? 0 : digimonLevel.hashCode());
 		result = prime * result + ((digimonName == null) ? 0 : digimonName.hashCode());
 		result = prime * result + ((imgUrl == null) ? 0 : imgUrl.hashCode());
@@ -69,7 +69,7 @@ public class CaughtDigimon {
 		if (getClass() != obj.getClass())
 			return false;
 		CaughtDigimon other = (CaughtDigimon) obj;
-		if (digidexId != other.digidexId)
+		if (digiDexId != other.digiDexId)
 			return false;
 		if (digimonLevel == null) {
 			if (other.digimonLevel != null)
@@ -92,10 +92,9 @@ public class CaughtDigimon {
 	}
 	@Override
 	public String toString() {
-		return "CaughtDigimon [digidexId=" + digidexId + ", digimonName=" + digimonName + ", imgUrl=" + imgUrl
+		return "CaughtDigimon [digiDexId=" + digiDexId + ", digimonName=" + digimonName + ", imgUrl=" + imgUrl
 				+ ", digimonLevel=" + digimonLevel + ", userId=" + userId + "]";
 	}
-    
-    
+
 
 }

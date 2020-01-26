@@ -40,7 +40,7 @@ public class DigimonController {
 		
 		//convert dto to digimon object
 		Digimon saveDigimon = new Digimon(0, 
-				caughtDigimon.getDigidexId(), 
+				caughtDigimon.getDigiDexId(), 
 				caughtDigimon.getDigimonName(), 
 				caughtDigimon.getImgUrl(), 
 				caughtDigimon.getDigimonLevel(), 
