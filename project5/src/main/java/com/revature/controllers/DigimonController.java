@@ -30,7 +30,7 @@ public class DigimonController {
 	@Autowired
 	IUserDao userDao;
 	
-	@PostMapping("/users/{id}/digimon")
+	@PostMapping("/userss/{id}/digimon")
 	public ResponseEntity<Boolean> saveDigimon(@RequestBody CaughtDigimon caughtDigimon) {
 		
 		//get user object from database
