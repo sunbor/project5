@@ -1,11 +1,12 @@
 <form class="form-signin" (submit)="login()">
-    <label class="primary" for="uname"><b>Username</b></label><br><br>
-    <input type="text" class="input-form" placeholder="Enter Username" id="username" name="username" required autofocus
+    <label class="primary" for="uname"><b>USERNAME</b></label><br><br>
+    <input type="text" class="input-form" placeholder="ENTER USERNAME" id="username" name="username" required autofocus
         [(ngModel)]="credentials.username"><br><br>
-    <label class="primary" for="psw"><b>Password</b></label><br><br>
-    <input type="password" class="input-form" name="password" id="password" placeholder="Password" required
+    <label class="primary" for="psw"><b>PASSWORD</b></label><br><br>
+    <input type="password" class="input-form" name="password" id="password" placeholder="ENTER PASSWORD" required
         [(ngModel)]="credentials.password"><br><br>
-    <button type="button" type="submit" class="login">LOGIN</button><br><br>
+    <button type="button" type="submit" class="login">LOGIN</button>　
+    <button type="button" (click)="register()">REGISTER NEW</button><br><br>
     <div id="error-message">
         {{errorMessage}}
     </div>

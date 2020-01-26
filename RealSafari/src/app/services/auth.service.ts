@@ -20,6 +20,10 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
+  register(){
+    this.router.navigateByUrl('/register');
+  }
+
   login(credentials: any) { //
     this.httpClient.post<User>('http://localhost:8080/project5/login', credentials, {
       withCredentials: true // processes only if credentials are filled ?

@@ -25,6 +25,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
+  register() {
+    this.authService.register();
+  }
+
   login() {
     this.authService.login(this.credentials);
   }
