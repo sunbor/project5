@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { EncounterComponent } from './encounter/encounter.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CollectionComponent } from './collection/collection.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CollectionComponent } from './collection/collection.component';
     LoginComponent,
     EncounterComponent,
     NavbarComponent,
-    CollectionComponent
+    CollectionComponent,
+    RegisterFormComponent
   ],
   imports: [
     FormsModule,
