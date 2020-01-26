@@ -62,10 +62,10 @@ public class UserDao implements IUserDao {
 
 	@Override
 	@Transactional
-	public void save(User u) {
+	public boolean save(User u) {
 		Session s = sf.getCurrentSession();
-		s.save(u);
-		// TODO Auto-generated method stub
+		Integer resultId = (Integer) s.save(u);
+		return resultId.intValue() != 0;
 		
 	}
 

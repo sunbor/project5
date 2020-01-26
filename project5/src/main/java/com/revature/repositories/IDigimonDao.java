@@ -11,5 +11,7 @@ public interface IDigimonDao {
 	public List<Digimon> getAll();
 	
 	public List<Digimon> getByUserId(int userId);
+	
+	public void delete(int id);
 
 }

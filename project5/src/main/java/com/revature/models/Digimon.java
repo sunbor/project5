@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.util.Comparator;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -164,6 +166,9 @@ public class Digimon {
 		return "Digimon [digimonId=" + digimonId + ", digiDexId=" + digiDexId + ", digimonName=" + digimonName
 				+ ", imgUrl=" + imgUrl + ", digimonLevel=" + digimonLevel + "]";
 	}
+	
+	
 
 
 }
+

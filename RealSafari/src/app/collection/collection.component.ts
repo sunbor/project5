@@ -11,6 +11,7 @@ import { User, AuthService } from '../services/auth.service';
 export class CollectionComponent implements OnInit {
 
   private digimon: DigimonFromDB[] = [];
+  private toggles: boolean[] = [];
 
   constructor(private httpClient: HttpClient,
     private authService: AuthService) { }
@@ -32,8 +33,18 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  toggleInfo() {
-    this.infoToggled = !this.infoToggled;
+  toggleInfo(i: number) {
+      this.toggles[i] = !this.toggles[i];
+    // this.infoToggled = !this.infoToggled;
+  }
+
+  deleteDigimon(i: number, digimonId: number){
+    console.log(i, digimonId)
+    this.httpClient.delete<boolean>(`http://localhost:8080/project5/digimon/${digimonId}/`, {
+      withCredentials: true
+    }).subscribe(() => {
+      this.digimon.splice(i, 1);
+    });
   }
 
 }

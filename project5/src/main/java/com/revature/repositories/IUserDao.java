@@ -15,6 +15,6 @@ public interface IUserDao {
 	//for testing
 	public List<User> getAll();
 	
-	public void save(User u);
+	public boolean save(User u);
 
 }

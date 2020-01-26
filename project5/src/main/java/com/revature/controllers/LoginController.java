@@ -47,4 +47,28 @@ public class LoginController {
 		return ResponseEntity.ok(respUser);
 		
 	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<User> register(@RequestBody LoginInfo reg){
+		
+		//check if username is already taken
+		if(userDao.getByUsername(reg.getUsername()) != null) {
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		}
+		
+		//get username and password
+		//put username and password into user object
+		//send user object to database
+		
+		User newUser = new User(0, reg.getUsername(), reg.getPassword(), null);
+		
+		boolean saveSuccess = userDao.save(newUser);
+		
+		if(saveSuccess) {
+			return ResponseEntity.ok(newUser);
+		}
+		else {
+			return new ResponseEntity<User>(HttpStatus.BAD_GATEWAY);
+		}
+	}
 }

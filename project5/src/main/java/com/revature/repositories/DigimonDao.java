@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -38,8 +39,16 @@ public class DigimonDao implements IDigimonDao {
 		return digiList;
 	}
 
+	@Override
+	@Transactional
+	public void delete(int id) {
+		Session s = sf.getCurrentSession();
+		Digimon placeholder = new Digimon(id, 0, "oh no", "oh no", "dead", null);
+
+		s.delete(placeholder);
+	}
 	
-	//stupid broken garbage
+	//stupid broken garbage i hate everything
 	@Override
 	@Transactional
 	public List<Digimon> getByUserId(int userId) {
