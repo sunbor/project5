@@ -8,9 +8,11 @@
         <div *ngIf="!isEscaped && !isCaught">
             <h4>Your chance encounter with a {{ digimon[0].name }} has begun!</h4>
             <img src="{{digimon[0].img}}">
-            <button type="button" class="btn btn-success" (click)="throwBait()">Throw Bait</button>
-            <button type="button" class="btn btn-danger" (click)="throwRock()">Throw Rock</button>
-            <button type="button" class="btn btn-warn" (click)="throwBall()">Throw Ball</button>
+            <div class="buttons" *ngIf="!needsResend && !isCaught">
+                <button type="button" class="btn btn-success" (click)="throwBait()">Throw Bait</button>
+                <button type="button" class="btn btn-danger" (click)="throwRock()">Throw Rock</button>
+                <button type="button" class="btn btn-warn" (click)="throwBall()">Throw Ball</button>
+            </div>
             <div *ngIf="(message !== '')">
                 <p name="message">{{ message }}</p>
                 <br>
@@ -31,6 +33,9 @@
         </div>
         <div *ngIf="isCaught">
             <h4>Congratulations, you caught the {{ digimon[0].name }}!</h4>
+            <img src="https://images-na.ssl-images-amazon.com/images/G/01/aplusautomation/vendorimages/87e26ba0-b921-47bc-8dbc-72388169103d.jpg._CB313354162__SL300__.jpg">
+            <br>
+            <p class="joke">This is totally a DigiBall</p>
             <button type="button" class="btn btn-success" (click)="beginEncounter()">Catch More Digimon</button>
             <!-- <button type="button" class="btn btn-success" (click)="goToCollection()">Return to Your Collection</button> -->
         </div>
