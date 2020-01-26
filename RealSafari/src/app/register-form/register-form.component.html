@@ -1,0 +1,14 @@
+<div>
+    <app-navbar></app-navbar>
+    <form (submit)="register()">
+        <div class="form-group">
+            <label for="title">Username</label>
+            <input type="text" name="subject" class="form-control" [(ngModel)]="subject" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="description">Password</label>
+            <input type="password" name="description" class="form-control" [(ngModel)]="description" placeholder="password">
+        </div>
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+</div>
