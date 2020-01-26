@@ -48,7 +48,7 @@ public class LoginController {
 		
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/users")
 	public ResponseEntity<User> register(@RequestBody LoginInfo reg){
 		
 		//check if username is already taken

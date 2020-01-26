@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DigimonFromDB } from '../services/encounter.service';
 import { HttpClient } from '@angular/common/http';
 import { User, AuthService } from '../services/auth.service';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-collection',
@@ -37,11 +38,15 @@ export class CollectionComponent implements OnInit {
   }
 
   deleteDigimon(i: number, digimonId: number){
-    console.log(i, digimonId)
+    console.log(i, digimonId);
+    for (let i1 = 0; i1 < this.toggles.length; i1++){
+      this.toggles[i1] = false;
+    }
     this.httpClient.delete<boolean>(`http://localhost:8080/project5/digimon/${digimonId}/`, {
       withCredentials: true
     }).subscribe(() => {
       this.digimon.splice(i, 1);
+
     });
   }
 
