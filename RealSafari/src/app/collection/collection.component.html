@@ -1,15 +1,25 @@
-<app-navbar></app-navbar>
-<div class="card" *ngFor="let digi of digimon; let i = index">
-    <div class="card-header text-center">
-        Name: {{digi.digimonName}}
-    </div>
-    <ul class="digimon-info-toggle list-group list-group-flush" (click)="toggleInfo(i)">
-        <li class="list-group-item">Info</li>
-    </ul>
-    <div class="card-body" *ngIf="toggles[i]">
-        <img src="{{digi.imgUrl}}">
-        <p>Digidex No.: {{ digi.digiDexId}}</p>
-        <p>Level: {{digi.digimonLevel}}</p>
-        <button type="button" class="btn btn-danger" (click)="deleteDigimon(i, digi.digimonId)">Delete</button>
+<div class="gray"><img id="power" src="assets/power.png">
+    <div class="black">
+        <div class="pg">
+
+
+            <app-navbar></app-navbar>
+            <div class="card" *ngFor="let digi of digimon; let i = index">
+                <div class="card-header text-center">
+                    Name: {{digi.digimonName}}
+                </div>
+                <ul class="digimon-info-toggle list-group list-group-flush" (click)="toggleInfo(i)">
+                    <li class="list-group-item">Info</li>
+                </ul>
+                <div class="card-body" *ngIf="toggles[i]">
+                    <img src="{{digi.imgUrl}}">
+                    <p>Digidex No.: {{ digi.digiDexId}}</p>
+                    <p>Level: {{digi.digimonLevel}}</p>
+                    <button type="button" class="btn btn-danger"
+                        (click)="deleteDigimon(i, digi.digimonId)">Delete</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

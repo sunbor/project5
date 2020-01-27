@@ -11,6 +11,11 @@
     width: 100%;
   }
 
+  button{
+    font-family: gbFonts;
+    background-color: #939677;
+}
+
 body {
   font-family: gbFonts;
   }
